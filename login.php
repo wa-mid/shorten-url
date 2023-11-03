@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Đăng nhập</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1 class="center">Login</h1>
+    <h1 class="center">Đăng nhập</h1>
     <div class="container">
         <?php
         if (isset($error_message)) {

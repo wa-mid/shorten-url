@@ -16,11 +16,9 @@ include('connect.php');
 </head>
 
 <body>
-    <div id="header">
-        <h1>URL Shortener</h1>
-        <form id="logout" method="post">
-            <input type="submit" name="logout" value="Logout">
-        </form>
+<div id="header">
+        <h1><a href="index.php">URL Shortener</a></h1>
+        <button id="logoutButton">Logout</button>
     </div>
 
     <main>
@@ -54,5 +52,35 @@ include('connect.php');
         ?>
     </main>
 </body>
+
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        // Check for a success message in the session
+        let successMessage = "<?php echo isset($_SESSION['success_message']) ? $_SESSION['success_message'] : ''; ?>";
+        if (successMessage) {
+            // Display a pop-up success alert
+            alert(successMessage);
+            // Remove the session variable to prevent displaying the message again
+            <?php unset($_SESSION['success_message']); ?>
+        }
+        let duplicate_message = "<?php echo isset($_SESSION['duplicate_message']) ? $_SESSION['duplicate_message'] : ''; ?>";
+        if (duplicate_message) {
+            alert(duplicate_message);
+            <?php unset($_SESSION['duplicate_message']); ?>
+        }
+    });
+
+    function confirmDelete(id) {
+        if (confirm("Are you sure you want to delete this URL?")) {
+            window.location.href = "delete.php?id=" + id;
+        }
+    }
+    document.getElementById("logoutButton").addEventListener("click", function() {
+        if (confirm("Are you sure you want to logout?")) {
+            // Redirect to the logout action (logout.php)
+            window.location.href = "logout.php";
+        }
+    });
+</script>
 
 </html>

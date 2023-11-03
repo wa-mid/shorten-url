@@ -23,6 +23,11 @@ body {
     margin-left: 10px;
 }
 
+#header h1 a{
+    color: #eee;
+    text-decoration: none;
+}
+
 .center {
     text-align: center;
 }
@@ -102,6 +107,30 @@ table a {
 /* Style table links on hover */
 table a:hover {
     text-decoration: underline;
+}
+
+.custom-table th:nth-child(1) {
+    width: 200px;
+}
+
+.custom-table th:nth-child(2) {
+    width: 200px;
+}
+
+.custom-table th:nth-child(3) {
+    width: 150px;
+}
+
+.custom-table th:nth-child(4) {
+    width: 100px;
+}
+
+.custom-table th:nth-child(5) {
+    width: 50px;
+}
+
+.custom-table th:nth-child(6) {
+    width: 50px;
 }
 
 

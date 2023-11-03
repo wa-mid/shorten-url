@@ -14,12 +14,11 @@ include('connect.php');
     <title>URL Shortener</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
 <body>
     <div id="header">
-        <h1>URL Shortener</h1>
+        <h1><a href="index.php">URL Shortener</a></h1>
         <button id="logoutButton">Logout</button>
     </div>
 
@@ -30,14 +29,14 @@ include('connect.php');
         </form>
 
         <h2>Your Shortened URLs</h2>
-        <table>
+        <table class="custom-table">
             <tr>
-                <th>Short URL</th>
-                <th>Original URL</th>
-                <th>Creation Date</th>
-                <th>Click Count</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>URL rút gọn</th>
+                <th>URL gốc</th>
+                <th>Ngày tạo</th>
+                <th>Lượt truy cập</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
             </tr>
 
             <?php
