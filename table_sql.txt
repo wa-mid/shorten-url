@@ -1,0 +1,16 @@
+CREATE DATABASE url_shortener;
+USE url_shortener;
+
+CREATE TABLE url_mappings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    short_code VARCHAR(10) NOT NULL UNIQUE,
+    original_url TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    click_count INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
