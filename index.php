@@ -25,6 +25,7 @@ include('connect.php');
     <main>
         <form action="shorten.php" method="post">
             <input type="text" name="original_url" class="url-input text-input" placeholder="Enter URL to shorten">
+            <input type="password" name="password" class="password-input text-input" placeholder="Password (if required)">
             <input type="submit" class="submit-button" value="Shorten">
         </form>
 
@@ -40,7 +41,7 @@ include('connect.php');
             </tr>
 
             <?php
-            $sql = "SELECT id, short_code, original_url, created_at, click_count FROM url_mappings";
+            $sql = "SELECT id, short_code, original_url, created_at, click_count, password FROM url_mappings";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -51,7 +52,7 @@ include('connect.php');
                     echo "<td>{$row['created_at']}</td>";
                     echo "<td>{$row['click_count']}</td>";
                     echo "<td><a href='edit.php?id={$row['id']}'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                    echo "<td><a href='#' onclick='confirmDelete({$row['id']});'><i class='fa-solid fa-trash'></i></a></td>";
+                    echo "<td><a href='#' onclick='confirmDelete({$row['id']}, {$row['password']});'><i class='fa-solid fa-trash'></i></a></td>";
                     echo "</tr>";
                 }
             } else {
@@ -61,7 +62,6 @@ include('connect.php');
             $conn->close();
             ?>
         </table>
-
     </main>
 </body>
 <script type="text/javascript">
@@ -81,9 +81,17 @@ include('connect.php');
         }
     });
 
-    function confirmDelete(id) {
-        if (confirm("Are you sure you want to delete this URL?")) {
-            window.location.href = "delete.php?id=" + id;
+    function confirmDelete(id, password) {
+        if (password) {
+            const enteredPassword = prompt("This URL is password-protected. Please enter the password:");
+            if (enteredPassword !== null) {
+                // Redirect to delete.php with the password as a parameter
+                window.location.href = `delete.php?id=${id}&password=${enteredPassword}`;
+            }
+        } else {
+            if (confirm("Are you sure you want to delete this URL?")) {
+                window.location.href = `delete.php?id=${id}`;
+            }
         }
     }
     document.getElementById("logoutButton").addEventListener("click", function() {
@@ -93,5 +101,4 @@ include('connect.php');
         }
     });
 </script>
-
 </html>

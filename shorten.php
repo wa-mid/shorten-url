@@ -4,7 +4,8 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['original_url'])) {
     $original_url = $_POST['original_url'];
-    
+    $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_BCRYPT) : null;
+
     // Check if the URL already exists in the database
     $check_sql = "SELECT id FROM url_mappings WHERE original_url = ?";
     $check_stmt = $conn->prepare($check_sql);
@@ -20,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['original_url'])) {
         $short_code = generateShortCode(); // Replace with your code
 
         // Insert the new short URL into the database
-        $sql = "INSERT INTO url_mappings (short_code, original_url) VALUES (?, ?)";
+        $sql = "INSERT INTO url_mappings (short_code, original_url, password) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $short_code, $original_url);
+        $stmt->bind_param("sss", $short_code, $original_url, $password);
 
         if ($stmt->execute()) {
             // Set a session variable to indicate success
